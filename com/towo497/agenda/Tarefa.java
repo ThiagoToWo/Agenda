@@ -1,7 +1,10 @@
 package com.towo497.agenda;
 
-public class Tarefa implements Comparable<Tarefa> {
+import java.io.Serializable;
+
+public class Tarefa implements Comparable<Tarefa>, Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private String mes;
 	private String dia;
 	private String data;
