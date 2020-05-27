@@ -15,38 +15,59 @@ public class MecanicaAgenda {
 	public void iniciar() {		
 		String option;
 		ag = new Agenda();
+		System.out.println("Agenda Simples");
 		do {
 			System.out.println("Escolha uma opção: Carregar = 0, Incluir = 1, Listar = 2, Excluir = 3, Salvar = 4, Sair = 5");
 			option = input.nextLine();
 			
 			switch (option) {
-			case "0": //carregar a agenda
-				System.out.println("Digite o endereço do arquivo: ");
-				String pathnameLoad = input.nextLine();		
-				File arquivoLoad = new File(pathnameLoad);
-				ag = ag.carregar(arquivoLoad);
+			case "0": //carregar a agenda					
+				File arquivoLoad = new File("C:\\Users\\Thiago ToWo\\Documents\\Agenda.ser");				
+				ag = ag.carregar(arquivoLoad);				
 				break;
 			case "1": //incluir tarefas
 				String continuar;
-				do {
-					System.out.print("Digite o mês (n\u00b0 de 01 a 12): ");
+				loopPrincipal: do {
+					System.out.print("Digite o mês (n\u00b0 de 01 a 12) ou -1 para sair: ");
 					mes = input.nextLine();
+					
 					while (!mes.matches("0\\d") && !mes.matches("1[012]")) {
-						System.out.println("Valor inválido!");
-						System.out.print("Digite o mês (n\u00b0 de 01 a 12): ");
-						mes = input.nextLine();
+						
+						if (!mes.equals("-1")) {
+							System.out.println("Valor inválido!");
+							System.out.print("Digite o mês (n\u00b0 de 01 a 12) ou -1 para sair: ");
+							mes = input.nextLine();
+						} else {
+							break loopPrincipal;
+						}
+						
 					}
-					System.out.print("Digite o dia (n\u00b0 de 01 a 31): ");
+					
+					System.out.print("Digite o dia (n\u00b0 de 01 a 31) ou -1 para sair: ");
 					dia = input.nextLine();
+					
 					while (!dia.matches("[012]\\d") && !dia.matches("3[01]")) {
-						System.out.println("Valor inválido!");
-						System.out.print("Digite o dia (n\u00b0 de 01 a 31): ");
-						dia = input.nextLine();
+						
+						if (!dia.equals("-1")) {
+							System.out.println("Valor inválido!");
+							System.out.print("Digite o dia (n\u00b0 de 01 a 31) ou -1 para sair: ");
+							dia = input.nextLine();
+						} else {
+							break loopPrincipal;
+						}
+						
 					}
-					System.out.print("Digite um título para a tarefa: ");
+					
+					System.out.print("Digite um título para a tarefa ou -1 para sair: ");
 					titulo = input.nextLine();
-					System.out.print("Digite uma pequena descrição: ");
+					if (titulo.equals("-1")) {
+						break loopPrincipal;
+					}
+					System.out.print("Digite uma pequena descrição ou -1 para sair: ");
 					descricao = input.nextLine();
+					if (descricao.equals("-1")) {
+						break loopPrincipal;
+					}
 					Tarefa tar = new Tarefa(mes, dia, titulo, descricao);
 					ag.incluir(tar);
 					System.out.print("Deseja incluir outra tarefa? (sim = 1, não = 2) ");
@@ -61,11 +82,10 @@ public class MecanicaAgenda {
 				String numero = input.nextLine();
 				ag.excluir(numero);
 				break;
-			case "4": //salvar agenda
-				System.out.println("Digite o endereço do arquivo: ");
-				String pathnameSave = input.nextLine();		
-				File arquivoSave = new File(pathnameSave);
+			case "4": //salvar agenda					
+				File arquivoSave = new File("C:\\Users\\Thiago ToWo\\Documents\\Agenda.ser");				
 				ag.salvar(arquivoSave);
+				System.out.println("Agenda salva com sucesso.");
 				break;
 			case "5":
 				ag.sair();

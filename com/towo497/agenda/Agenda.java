@@ -23,13 +23,10 @@ public class Agenda implements Serializable{
 			agenda.listar();			
 			oi.close();
 		} catch (IOException e) {
-			System.out.println("Endereço de arquivo inválido.");
-			e.printStackTrace();
+			System.out.println("Ocorreu um erro! " + e.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-		
+			System.out.println("Ocorreu um erro! " + e.getMessage());
+		}			
 		return agenda;
 	}
 
@@ -39,8 +36,12 @@ public class Agenda implements Serializable{
 	}
 	
 	public void listar() {
+		System.out.println("==============================================================");
+		System.out.println("Lista de tarefas (Tarefa n\u00b0. mês/dia - título: descrição)");
+		System.out.println("==============================================================");
 		for (int i = 1; i <= listaTarefas.size(); i++) {
 			System.out.println("Tarefa n\u00b0 " + i + ". " + listaTarefas.get(i - 1));
+			System.out.println("----------------------------------------------------------------------");
 		}		
 	}
 	
@@ -70,7 +71,7 @@ public class Agenda implements Serializable{
 			os.writeObject(this);
 			os.close();
 		} catch (IOException e) {
-			System.out.println("Endereço de arquivo inválido.");
+			System.out.println("Ocorreu um erro! " + e.getMessage());
 			return;
 		}
 	}
