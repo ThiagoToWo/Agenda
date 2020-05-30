@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.swing.DefaultListModel;
+
 public class Agenda implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -43,8 +45,8 @@ public class Agenda implements Serializable{
 			System.out.println("Tarefa n\u00b0 " + i + ". " + listaTarefas.get(i - 1));
 			System.out.println("----------------------------------------------------------------------");
 		}		
-	}
-	
+	}	
+
 	public void excluir(String numero) {
 		
 		if (numero.matches("\\d")) {
@@ -80,5 +82,30 @@ public class Agenda implements Serializable{
 		System.out.println("Programa finalizado.");
 		return;
 	}
+	
+	//métodos que usam DefaultListModel<Tarefa> de uma gui.
+	public void listarNaListaSelecionavel(DefaultListModel<Tarefa> listModel) {	
+		listModel.removeAllElements();
+		listModel.addAll(listaTarefas);
+	}
 
+	public void incluirNaListaSelecionavel(Tarefa tar, DefaultListModel<Tarefa> listModel) {
+		listaTarefas.add(tar);
+		Collections.sort(listaTarefas);
+		listModel.removeAllElements();
+		listModel.addAll(listaTarefas);
+	}
+
+	public void excluirDaListaSelecionavel(int[] indices, DefaultListModel<Tarefa> listModel) {
+		//listModel.removeElement(i);
+		ArrayList<Tarefa> listaRemovidos = new ArrayList<Tarefa>();
+		for (int i : indices) {
+			listaRemovidos.add(listaTarefas.get(i));
+		}
+		listaTarefas.removeAll(listaRemovidos);				
+		Collections.sort(listaTarefas);
+		listModel.removeAllElements();
+		listModel.addAll(listaTarefas);
+	}
+	
 }
