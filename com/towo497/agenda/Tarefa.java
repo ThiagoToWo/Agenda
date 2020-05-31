@@ -18,7 +18,7 @@ public class Tarefa implements Comparable<Tarefa>, Serializable {
 		this.titulo = titulo;
 		this.descricao = descricao;
 	}
-
+	
 	public String toString() {
 		return mes + "/" + dia + " - " + titulo + ": " + descricao;
 	}
