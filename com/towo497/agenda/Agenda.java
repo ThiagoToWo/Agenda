@@ -116,13 +116,22 @@ public class Agenda implements Serializable{
 		Calendar data = Calendar.getInstance();	
 		int mesAtualInt =  data.get(Calendar.MONTH) + 1;
 		String mesAtual = null;
+		
 		if (mesAtualInt < 10) {
 			mesAtual = "0" + mesAtualInt;
 		} else {
 			mesAtual = "" + mesAtualInt;
-		}				
-		String diaAtual = "" + data.get(Calendar.DAY_OF_MONTH);		
-		hoje = new Tarefa(mesAtual, diaAtual, "HOJE", "FIQUE DE OLHO NAS PRÓXIMAS TAREFAS");
+		}	
+		
+		int diaAtualInt = data.get(Calendar.DAY_OF_MONTH);
+		String diaAtual = null;
+		
+		if (diaAtualInt < 10) {
+			diaAtual = "0" + diaAtualInt;
+		} else {
+			diaAtual = "" + diaAtualInt;
+		}	
+		hoje = new Tarefa(mesAtual, diaAtual, "\u0394 HOJE", "FIQUE DE OLHO NAS PRÓXIMAS TAREFAS");
 		listaTarefas.add(hoje);
 		Collections.sort(listaTarefas);
 	}
