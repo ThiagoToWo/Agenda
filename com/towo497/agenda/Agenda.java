@@ -92,7 +92,11 @@ public class Agenda implements Serializable{
 	//métodos que usam DefaultListModel<Tarefa> de uma gui.
 	public void listarNaListaSelecionavel(DefaultListModel<Tarefa> listModel) {	
 		listModel.removeAllElements();
-		listModel.addAll(listaTarefas);
+		
+		for (Tarefa tar : listaTarefas) {
+			listModel.addElement(tar);;
+		}
+		
 	}
 
 	public void incluirNaListaSelecionavel(Tarefa tar, DefaultListModel<Tarefa> listModel) {		
@@ -131,7 +135,7 @@ public class Agenda implements Serializable{
 		} else {
 			diaAtual = "" + diaAtualInt;
 		}	
-		hoje = new Tarefa(mesAtual, diaAtual, "\u0394 HOJE", "FIQUE DE OLHO NAS PRÓXIMAS TAREFAS");
+		hoje = new Tarefa(mesAtual, diaAtual, "HOJE", "FIQUE DE OLHO NAS PRÓXIMAS TAREFAS");
 		listaTarefas.add(hoje);
 		Collections.sort(listaTarefas);
 	}
