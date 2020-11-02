@@ -24,7 +24,7 @@ public class Gui extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private Agenda agenda;
 	private String autor = "Autor: Thiago de Oliveira Alves\ntowo497@gmail.com";
-	private String versao = "Versão: 0.0 \n 31-05-2020\n\n";
+	private String versao = "Versão: 1.0 \n 02-11-2020\n\n";
 	private DefaultListModel<Tarefa> listModel;
 	private JList<Tarefa> listaDeTarefas;
 
@@ -51,7 +51,7 @@ public class Gui extends JFrame {
 		listaDeTarefas.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		listaDeTarefas.setFont(new Font(null, Font.BOLD, 16));
 		listaDeTarefas.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		// cria os botões com os comandos da agenda: Carregar, Incluir, Excluir, Salvar
+		// cria os botões com os comandos da agenda: Carregar, Incluir, Excluir, Salvar, Exportar texto
 		JButton botCarregar = new JButton("Carregar");
 		botCarregar.addActionListener(new CarregarListener());
 		JButton botIncluir = new JButton("Incluir");
@@ -60,12 +60,15 @@ public class Gui extends JFrame {
 		botExcluir.addActionListener(new ExcluirListener());
 		JButton botSalvar = new JButton("Salvar");
 		botSalvar.addActionListener(new SalvarListener());
+		JButton botExpTexto = new JButton("Exportar texto");
+		botExpTexto.addActionListener(new ExpTextoListener());
 		// cria um painel para adicionar os botões
 		JPanel painelDeBotoes = new JPanel();
 		painelDeBotoes.add(botCarregar);
 		painelDeBotoes.add(botIncluir);
 		painelDeBotoes.add(botExcluir);
 		painelDeBotoes.add(botSalvar);
+		painelDeBotoes.add(botExpTexto);
 		// adiciona no frame a brra de rolagem que contém a lista e o painel de botões
 		add(new JScrollPane(listaDeTarefas));
 		getContentPane().add(BorderLayout.SOUTH, painelDeBotoes);
@@ -141,6 +144,16 @@ public class Gui extends JFrame {
 
 	}
 	
+	public class ExpTextoListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JFileChooser save = new JFileChooser();
+			save.showSaveDialog(getParent());			
+			agenda.listar(save.getSelectedFile());	
+		}
+
+	}
 	private class AutorListener implements ActionListener {
 
 		@Override

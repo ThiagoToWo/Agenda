@@ -2,10 +2,12 @@ package com.towo497.agenda;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -52,6 +54,23 @@ public class Agenda implements Serializable{
 			System.out.println("Tarefa n\u00b0 " + i + ". " + listaTarefas.get(i - 1));
 			System.out.println("----------------------------------------------------------------------");
 		}		
+	}
+	// exportar lista de tarefas em arquivo de texto
+	public void listar(File file) {
+		try {
+			PrintStream p = new PrintStream(file);
+			p.println("==============================================================");
+			p.println("Lista de tarefas (Tarefa n\u00b0. mês/dia - título: descrição)");
+			p.println("==============================================================");
+			for (int i = 1; i <= listaTarefas.size(); i++) {
+				p.println("Tarefa n\u00b0 " + i + ". " + listaTarefas.get(i - 1));
+				p.println("----------------------------------------------------------------------");
+			}
+			p.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+			
 	}	
 	//versão para linha de comando
 	public void excluir(String numero) {		
